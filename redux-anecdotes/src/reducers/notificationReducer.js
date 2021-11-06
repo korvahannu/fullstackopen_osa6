@@ -1,4 +1,4 @@
-
+let timer;
 
 const notificationReducer = (state = '', action) => {
 
@@ -19,13 +19,13 @@ export const setNotification = (notification, time) => {
 
   return async dispatch => {
 
+    clearTimeout(timer);
     dispatch({type:'SET_NOTIFICATION', notification});
-    setTimeout(() => dispatch(emptyNotification()), time*1000);
-
+    timer = setTimeout(() => dispatch(emptyNotification()), time*1000);
   };
 };
 
-export const emptyNotification = notification => {
+export const emptyNotification = () => {
   return {
     type: 'EMPTY_NOTIFICATION'
   }
